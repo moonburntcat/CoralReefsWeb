@@ -154,6 +154,25 @@ main {
   box-shadow: 0 20px 60px rgba(1, 8, 15, 0.55);
 }
 
+.hero-split {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(360px, 2fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-copy h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  color: #b3f6ff;
+}
+
 .hero h1 {
   font-size: 2.8rem;
   margin-bottom: 1rem;
@@ -163,6 +182,136 @@ main {
 .hero p {
   max-width: 700px;
   color: #d1e6ff;
+}
+
+.hero-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.stat-card {
+  background: rgba(2, 20, 33, 0.55);
+  border-radius: 14px;
+  padding: 1.2rem 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8fb3cc;
+  margin-bottom: 0.4rem;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.eyebrow {
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7fe8ff;
+  margin-bottom: 1rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.cta-primary {
+  background: #4dd2ff;
+  color: #02111b;
+  border: none;
+  font-weight: 600;
+}
+
+.cta-ghost {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #d1e6ff;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.hero-tags span {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  color: #d9f5ff;
+}
+
+.hero-media figure {
+  margin: 0;
+  background: rgba(2, 20, 33, 0.7);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+}
+
+.hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-height: 360px;
+}
+
+.hero-slider {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slider-slide {
+  min-width: 100%;
+}
+
+.slider-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 0.8rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.slider-dot.active {
+  background: #4dd2ff;
+  transform: scale(1.2);
+}
+
+.hero-media figcaption {
+  padding: 0.8rem 1.2rem;
+  font-size: 0.9rem;
+  color: #9fd7ff;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .grid {
@@ -184,6 +333,10 @@ main {
   padding: 1.75rem;
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+.accent-card {
+  background: linear-gradient(135deg, rgba(77, 210, 255, 0.15), rgba(4, 44, 61, 0.85));
 }
 
 .card h3 {
@@ -214,6 +367,11 @@ main {
   color: #4dd2ff;
 }
 
+.highlight-list li {
+  color: #fff;
+  font-weight: 500;
+}
+
 .cta {
   display: inline-flex;
   align-items: center;
@@ -228,6 +386,74 @@ main {
 
 .cta:hover {
   transform: translateY(-2px);
+}
+
+.metrics {
+  margin: 2.5rem 0;
+}
+
+.metric-card {
+  background: rgba(2, 20, 33, 0.5);
+  border-radius: 14px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #7fe8ff;
+}
+
+.metric-label {
+  margin-top: 0.4rem;
+  color: #c8eaff;
+}
+
+.gradient-card {
+  background: linear-gradient(160deg, rgba(4, 44, 61, 0.8), rgba(4, 44, 61, 0.4));
+  border: 1px solid rgba(127, 232, 255, 0.3);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.timeline-item span {
+  font-weight: 600;
+  color: #7fe8ff;
+}
+
+.timeline-item p {
+  margin-top: 0.3rem;
+  color: #d9f5ff;
+}
+
+.partners-card {
+  margin-top: 2.5rem;
+}
+
+.partner-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.partner-tags span {
+  padding: 0.4rem 0.9rem;
+  border-radius: 10px;
+  background: rgba(77, 210, 255, 0.15);
+  border: 1px solid rgba(77, 210, 255, 0.3);
+}
+
+.partners-card .tip {
+  margin-top: 1rem;
+  color: #9fd7ff;
 }
 
 .gallery {
@@ -294,6 +520,10 @@ footer {
   .nav-bar {
     flex-direction: column;
     gap: 0.8rem;
+  }
+
+  .hero-split {
+    grid-template-columns: 1fr;
   }
 
   .hero h1 {

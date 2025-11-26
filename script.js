@@ -137,3 +137,48 @@ if (tipTarget) {
   tipTarget.textContent = tipList[index];
 }
 
+const heroSlider = document.querySelector("[data-hero-slider]");
+if (heroSlider) {
+  const track = heroSlider.querySelector("[data-slider-track]");
+  const slides = Array.from(heroSlider.querySelectorAll("[data-slider-slide]"));
+  const dots = Array.from(heroSlider.querySelectorAll("[data-slider-dot]"));
+  let currentIndex = 0;
+  let timer;
+
+  const goToSlide = (index) => {
+    if (!track) return;
+    currentIndex = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === currentIndex);
+    });
+  };
+
+  const startAutoPlay = () => {
+    stopAutoPlay();
+    timer = setInterval(() => {
+      goToSlide(currentIndex + 1);
+    }, 5000);
+  };
+
+  const stopAutoPlay = () => {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  };
+
+  dots.forEach((dot, idx) => {
+    dot.addEventListener("click", () => {
+      goToSlide(idx);
+      startAutoPlay();
+    });
+  });
+
+  heroSlider.addEventListener("mouseenter", stopAutoPlay);
+  heroSlider.addEventListener("mouseleave", startAutoPlay);
+
+  goToSlide(0);
+  startAutoPlay();
+}
+
