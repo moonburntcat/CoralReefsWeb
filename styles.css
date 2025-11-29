@@ -82,13 +82,13 @@ header {
   position: absolute;
   top: calc(100% + 0.2rem);
   left: 0;
-  min-width: 220px;
+  min-width: 440px;
   background: rgba(4, 44, 61, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
   padding: 0.4rem;
-  flex-direction: column;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.05rem;
   z-index: 20;
 }
@@ -104,7 +104,7 @@ header {
 
 .has-dropdown:hover .dropdown-menu,
 .has-dropdown:focus-within .dropdown-menu {
-  display: flex;
+  display: grid;
 }
 
 .dropdown-menu a {
@@ -112,6 +112,14 @@ header {
   padding: 0.2rem 0.8rem;
   font-weight: 500;
   font-size: 0.60rem;
+}
+
+.dropdown-menu a[data-nav-species] {
+  font-style: italic;
+}
+
+.species-name {
+  font-style: italic;
 }
 
 .lang-toggle {
@@ -180,7 +188,8 @@ main {
 }
 
 .hero p {
-  max-width: 700px;
+  width: 100%;
+  max-width: none;
   color: #d1e6ff;
 }
 
@@ -520,6 +529,11 @@ footer {
   .nav-bar {
     flex-direction: column;
     gap: 0.8rem;
+  }
+
+  .dropdown-menu {
+    min-width: 220px;
+    grid-template-columns: 1fr;
   }
 
   .hero-split {

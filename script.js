@@ -14,6 +14,7 @@ const speciesPages = [
   "species-acropora.html",
   "species-acanthastrea.html",
   "species-cynarina.html",
+  "species-ctenactis.html",
   "species-diploastrea.html",
   "species-euphflfiaancora.html",
   "species-favosites.html",
@@ -28,11 +29,13 @@ const speciesPages = [
   "species-sarcophyton.html",
   "species-sinularia.html",
   "species-turbinaria.html",
+  "species-xenia.html",
   "species-zoanthus.html",
   "species-cn.html",
   "species-acropora-cn.html",
   "species-acanthastrea-cn.html",
   "species-cynarina-cn.html",
+  "species-ctenactis-cn.html",
   "species-diploastrea-cn.html",
   "species-euphflfiaancora-cn.html",
   "species-favosites-cn.html",
@@ -47,6 +50,7 @@ const speciesPages = [
   "species-sarcophyton-cn.html",
   "species-sinularia-cn.html",
   "species-turbinaria-cn.html",
+  "species-xenia-cn.html",
   "species-zoanthus-cn.html",
 ];
 
@@ -54,6 +58,73 @@ if (speciesPages.includes(pageName)) {
   document
     .querySelectorAll("[data-nav-species]")
     .forEach((el) => el.classList.add("active"));
+}
+
+const buildLatinName = (file) => {
+  if (!file.startsWith("species-") || file === "species-cn.html") {
+    return null;
+  }
+  const normalized = file.replace("-cn", "");
+  if (normalized === "species.html") {
+    return null;
+  }
+  const slug = normalized.replace("species-", "").replace(".html", "");
+  if (!slug) {
+    return null;
+  }
+  return slug
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+};
+
+const latinName = buildLatinName(pageName);
+
+const wrapLatinNames = (root, name) => {
+  if (!root || !name) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (
+        !node.nodeValue ||
+        !node.nodeValue.includes(name) ||
+        !node.parentElement ||
+        node.parentElement.closest(".species-name") ||
+        ["SCRIPT", "STYLE"].includes(node.parentElement.tagName)
+      ) {
+        return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    },
+  });
+
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  textNodes.forEach((node) => {
+    let current = node;
+    while (current && current.nodeType === Node.TEXT_NODE) {
+      const index = current.nodeValue.indexOf(name);
+      if (index === -1) break;
+      const range = document.createRange();
+      range.setStart(current, index);
+      range.setEnd(current, index + name.length);
+      const span = document.createElement("span");
+      span.className = "species-name";
+      range.surroundContents(span);
+      current = span.nextSibling;
+      if (!current || current.nodeType !== Node.TEXT_NODE) {
+        break;
+      }
+    }
+  });
+};
+
+if (latinName) {
+  document.body.classList.add("species-page");
+  const contentRoot = document.querySelector(".content");
+  wrapLatinNames(contentRoot, latinName);
 }
 
 const langPairs = {
@@ -73,6 +144,8 @@ const langPairs = {
   "species-acanthastrea-cn.html": "species-acanthastrea.html",
   "species-cynarina.html": "species-cynarina-cn.html",
   "species-cynarina-cn.html": "species-cynarina.html",
+  "species-ctenactis.html": "species-ctenactis-cn.html",
+  "species-ctenactis-cn.html": "species-ctenactis.html",
   "species-diploastrea.html": "species-diploastrea-cn.html",
   "species-diploastrea-cn.html": "species-diploastrea.html",
   "species-euphflfiaancora.html": "species-euphflfiaancora-cn.html",
@@ -101,6 +174,8 @@ const langPairs = {
   "species-sinularia-cn.html": "species-sinularia.html",
   "species-turbinaria.html": "species-turbinaria-cn.html",
   "species-turbinaria-cn.html": "species-turbinaria.html",
+  "species-xenia.html": "species-xenia-cn.html",
+  "species-xenia-cn.html": "species-xenia.html",
   "species-zoanthus.html": "species-zoanthus-cn.html",
   "species-zoanthus-cn.html": "species-zoanthus.html",
 };
