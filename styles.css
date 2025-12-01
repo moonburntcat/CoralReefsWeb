@@ -557,6 +557,21 @@ main {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.species-table td.thumb-cell {
+  padding: 0.6rem 1rem;
+  width: 80px;
+}
+
+.species-table td.thumb-cell img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
 .species-table tbody tr:hover {
   background: rgba(77, 210, 255, 0.08);
   transition: background 0.3s ease;
